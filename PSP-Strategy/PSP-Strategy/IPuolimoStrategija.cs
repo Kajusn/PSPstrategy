@@ -6,7 +6,7 @@ namespace PSP_Strategy
 {
     public interface IPuolimoStrategija
     {
-        String puolimoStrategija(double sarvai, string klase);
-        float zalosKeitimas(int lygis, int gyvybes);
+        double puolimoApsauga(double sarvai, string klase);
+        double zalosKeitimas(int lygis, string klase);
     }
 }

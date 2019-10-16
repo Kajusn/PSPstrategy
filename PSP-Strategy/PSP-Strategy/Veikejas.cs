@@ -13,7 +13,7 @@ namespace PSP_Strategy
         public int lygis;
         public bool gyvas;
         public double gyvybes;
-        public float maxZala;
+        public double maxZala;
         public IPuolimoStrategija PuolimoTipas { get; set; }
         public IGyvybiuSkaiciavimas GyvybiuTipas { get; set; }
         public string kilme;
@@ -64,7 +64,7 @@ namespace PSP_Strategy
         {
             this.GyvybiuTipas = new GyvybiuSkaiciavimasPaprastas();
             this.KeistiLygi(1);
-            this.sarvai = 0;
+            this.sarvai = lygis*10;
             this.maxZala = 5;
             switch (klase)
             {
@@ -116,15 +116,19 @@ namespace PSP_Strategy
         {
             this.lygis = naujasLygis;
             this.gyvybes = this.lygis * 100;
-            this.gyvybes = this.GyvybiuTipas.veikejoGyvybes(this.gyvybes, this.sarvai, this.lygis);
+            this.gyvybes = GyvybiuSkaiciavimas();
+            if (this.PuolimoTipas != null)
+                this.maxZala = this.PuolimoTipas.zalosKeitimas(this.lygis, this.klase);
         }
-        public int GyvybesApsk()
+        private double GyvybiuSkaiciavimas()
         {
-            return this.lygis * 100;
+            return this.GyvybiuTipas.veikejoGyvybes(this.gyvybes, this.sarvai, this.lygis);
         }
-
         public void PasirinktiPuolimoTipa(int tipas)
         {
+            if (this.PuolimoTipas != null)
+                return;
+
             switch (tipas)
             {
                 case (int)PuolimoTipai.Agresyvus:
@@ -134,6 +138,35 @@ namespace PSP_Strategy
                     this.PuolimoTipas = new SaugusPuolimas();
                     break;
             }
+
+            this.sarvai = this.PuolimoTipas.puolimoApsauga(this.sarvai, this.klase);
+            this.maxZala = this.PuolimoTipas.zalosKeitimas(this.lygis, this.klase);
+        }
+        public bool Pulti(Veikejas taikinys)
+        {
+            if (!taikinys.gyvas) return false;
+            if (taikinys.sarvai > 0)
+            {
+                if (this.maxZala >= taikinys.sarvai)
+                {
+                    taikinys.sarvai = 0;
+                    return true;
+                }
+                else taikinys.sarvai -= this.maxZala;
+                return true;
+            }
+            else if (taikinys.gyvybes > this.maxZala)
+            {
+                taikinys.gyvybes -= this.maxZala;
+                return true;
+            }
+            else if (taikinys.gyvybes <= this.maxZala)
+            {
+                taikinys.gyvybes = 0;
+                taikinys.gyvas = false;
+                return true;
+            }
+            return false;
         }
     }
 }

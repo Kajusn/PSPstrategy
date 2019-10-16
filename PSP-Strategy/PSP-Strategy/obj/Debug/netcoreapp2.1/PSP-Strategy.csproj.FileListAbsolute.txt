@@ -1,0 +1,11 @@
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\bin\Debug\netcoreapp2.1\PSP-Strategy.deps.json
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\bin\Debug\netcoreapp2.1\PSP-Strategy.runtimeconfig.json
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\bin\Debug\netcoreapp2.1\PSP-Strategy.runtimeconfig.dev.json
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\bin\Debug\netcoreapp2.1\PSP-Strategy.dll
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\bin\Debug\netcoreapp2.1\PSP-Strategy.pdb
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\obj\Debug\netcoreapp2.1\PSP-Strategy.csprojAssemblyReference.cache
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\obj\Debug\netcoreapp2.1\PSP-Strategy.csproj.CoreCompileInputs.cache
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\obj\Debug\netcoreapp2.1\PSP-Strategy.AssemblyInfoInputs.cache
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\obj\Debug\netcoreapp2.1\PSP-Strategy.AssemblyInfo.cs
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\obj\Debug\netcoreapp2.1\PSP-Strategy.dll
+C:\Users\kajus\source\repos\Kajusn\PSPstrategy\PSP-Strategy\PSP-Strategy\obj\Debug\netcoreapp2.1\PSP-Strategy.pdb

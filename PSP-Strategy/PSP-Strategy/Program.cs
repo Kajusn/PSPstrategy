@@ -18,27 +18,24 @@ namespace PSP_Strategy
             string puolimoPasirinkimas = @"^puolimo tipas$";
             string lygioSablonas = @"^(100|[1-9][0-9]|[1-9])$";
             string puolimoTipoSablonas = @"^[1-2]$";
-            Regex rgxLygis = new Regex(lygioSablonas);
             Regex rgxLygioKelimas = new Regex(lygioKelimas);
             Regex rgxPuolimas = new Regex(puolimas);
             Regex rgxPuolimoPasirinkimas = new Regex(puolimoPasirinkimas);
-            Regex rgxPuolimoTipas = new Regex(puolimoTipoSablonas);
-            int sudetingumas = ZaidimoPradzia();
-            Console.WriteLine("Kuriami priesai...\n");
             Random rnd = new Random();
             List<Veikejas> priesai = new List<Veikejas>();
+
+            int sudetingumas = ZaidimoPradzia();
             for (int i=0; i<sudetingumas*3; i++)
             {
                 priesai.Add(new Veikejas(rnd.Next(1, 3), rnd.Next(1,4), rnd.Next(1,10), rnd.Next(50, 200), rnd.Next(10, 70)));
             }
-            foreach (Veikejas v in priesai)
-            {
-                Console.WriteLine("Klase: "+v.klase+" Lygis: " + v.lygis + " Kilme: " + v.kilme + " Gyvybes: " + v.gyvybes + " Sarvai: " + v.sarvai + " Zala: " + v.maxZala);
-            }
-            
             while (true)
             {
-                Console.WriteLine("\nGalimos komandos: \"pulti\" ir \"lygis\" \"puolimo tipas\"\n");
+                foreach (Veikejas v in priesai)
+                {
+                    Console.WriteLine("[" + (priesai.IndexOf(v)+1) + "] " + v.klase + "(" + v.lygis + ")" + " HP: " + v.gyvybes + " AR: " + v.sarvai + " DMG: " + v.maxZala);
+                }
+                Console.WriteLine("\nGalimos komandos: \"pulti\", \"lygis\", \"puolimo tipas\"\n");
                 val = Console.ReadLine();
                 if (rgxLygioKelimas.IsMatch(val))
                 {

@@ -6,14 +6,18 @@ namespace PSP_Strategy
 {
     public class SaugusPuolimas : IPuolimoStrategija
     {
-        public string puolimoStrategija(double sarvai, string klase)
+        public double puolimoApsauga(double sarvai, string klase)
         {
-            throw new NotImplementedException();
+            if (klase == "Magas" || klase == "Alchemikas")
+                return sarvai*1.5;
+            else return sarvai*2;
         }
 
-        public float zalosKeitimas(int lygis, int gyvybes)
+        public double zalosKeitimas(int lygis, string klase)
         {
-            throw new NotImplementedException();
+            if (klase == "Karvedys" || klase == "Kovotojas")
+                return 0;
+            else return lygis*5;
         }
     }
 }
