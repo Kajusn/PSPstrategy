@@ -12,6 +12,13 @@ namespace PSP_Strategy
         private static Veikejas zaidejas;
         static void Main(string[] args)
         {
+            string val;
+            string lygioKelimas = @"^lygis$";
+            string puolimas = @"^pulti$";
+            string lygioSablonas = @"^(100|[1-9][0-9]|[1-9])$";
+            Regex rgxLygis = new Regex(lygioSablonas);
+            Regex rgxLygioKelimas = new Regex(lygioKelimas);
+            Regex rgxPuolimas = new Regex(puolimas);
             int sudetingumas = zaidimoPradzia();
             Console.WriteLine("Kuriami priesai...\n");
             Random rnd = new Random();
@@ -24,7 +31,28 @@ namespace PSP_Strategy
             {
                 Console.WriteLine("Klase: "+v.klase+" Lygis: " + v.lygis + " Kilme: " + v.kilme + " Gyvybes: " + v.gyvybes + " Sarvai: " + v.sarvai + " Zala: " + v.maxZala);
             }
-
+            
+            while (true)
+            {
+                Console.WriteLine("Galimos komandos: \"pulti\" ir \"lygis\"\n");
+                if (rgxLygioKelimas.IsMatch(val = Console.ReadLine()))
+                {
+                    Console.WriteLine("Iveskite nauja lygi (0-100):\n");
+                    while (!rgxLygis.IsMatch(val = Console.ReadLine()))
+                        Console.WriteLine("Netinkamas lygio formatas. Bandykite dar karta:\n");
+                    zaidejas.keistiLygi(Convert.ToInt16(val));
+                    Console.Clear(); Console.WriteLine("Lygis pakeistas! Naujas lygis: " + zaidejas.lygis + ", gyvybes: " + zaidejas.gyvybes + "\n");
+                    Console.ReadLine();
+                }
+                else if (rgxPuolimas.IsMatch(val = Console.ReadLine()))
+                {
+                    Console.ReadLine();
+                }
+                else
+                    Console.WriteLine("Neatpazinta komanda!\n");
+                Console.Clear();
+            }
+            
 
         }
 
@@ -47,6 +75,7 @@ namespace PSP_Strategy
             param[0] = Convert.ToInt32(val);
 
             pattern = @"^[1-3]$";
+            rgx = new Regex(pattern);
 
             Console.WriteLine("Pasirinkite veikejo kilme (iveskite skaiciu):\n"+
                               "1. Troja\n" +
@@ -61,9 +90,14 @@ namespace PSP_Strategy
             Console.WriteLine("Pasirinkite gyvybiu tipa:\n" +
                               "1. Nuo lygio, sarvu ir klases\n" +
                               "2. Nuo lygio, kilmes ir klases\n" +
-                              "3. Paprastas \n");
+                              "3. Paprastas tik nuo lygio\n");
             while (!rgx.IsMatch(val = Console.ReadLine()))
                 Console.WriteLine("Nenumatytas pasirinkimas, bandykite dar karta\n");
+            if (Convert.ToInt32(val) == 1)
+                zaidejas.GyvybiuTipas = new GyvybiuSkaiciavimasPridetinis();
+
+            else if (Convert.ToInt32(val) == 2)
+                zaidejas.GyvybiuTipas = new GyvybiuSkaiciavimasTobulinamas();
 
             Console.WriteLine("Personazas sukurtas!\nTesti...[ENTER]");
             Console.ReadLine(); Console.Clear();

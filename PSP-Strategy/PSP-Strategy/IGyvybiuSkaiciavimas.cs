@@ -6,7 +6,7 @@ namespace PSP_Strategy
 {
     public interface IGyvybiuSkaiciavimas
     {
-        double veikejoGyvybes(int gyvybes, double sarvai, int lygis);
-        double papildomosGyvybes(string klase, int gyvybes, string kilme);
+        double veikejoGyvybes(double gyvybes, double sarvai, int lygis);
+        double papildomosGyvybes(string klase, double gyvybes, string kilme);
     }
 }

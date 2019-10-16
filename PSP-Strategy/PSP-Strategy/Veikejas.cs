@@ -8,8 +8,8 @@ namespace PSP_Strategy
     {
         private enum Klase { Karvedys = 1, Kovotojas, Magas, Alchemikas };
         private enum Kilme { Troja = 1, Maneja, Trofis };
-        public int lygis { get; set; }
         public double sarvai { get; set; }
+        public int lygis;
         public bool gyvas;
         public double gyvybes;
         public float maxZala;
@@ -20,8 +20,8 @@ namespace PSP_Strategy
 
         public Veikejas(int kilme, int klase, int lygis, int sarvai, int maxZala)
         {
-            this.gyvybes = 300;
-            this.lygis = lygis;
+            this.GyvybiuTipas = new GyvybiuSkaiciavimasPaprastas();
+            this.keistiLygi(lygis);
             this.sarvai = sarvai;
             this.maxZala = maxZala;
             switch (klase)
@@ -61,7 +61,8 @@ namespace PSP_Strategy
         }
         public Veikejas(int kilme, int klase)
         {
-            this.lygis = 1;
+            this.GyvybiuTipas = new GyvybiuSkaiciavimasPaprastas();
+            this.keistiLygi(1);
             this.sarvai = 0;
             this.maxZala = 5;
             switch (klase)
@@ -101,7 +102,8 @@ namespace PSP_Strategy
         }
         public Veikejas()
         {
-            this.lygis = 1;
+            this.GyvybiuTipas = new GyvybiuSkaiciavimasPaprastas();
+            this.keistiLygi(1);
             this.sarvai = 0;
             this.maxZala = 5;
             this.kilme = "Trofis";
@@ -109,9 +111,15 @@ namespace PSP_Strategy
             this.klase = "Kovotojas";
         }
 
+        public void keistiLygi(int naujasLygis)
+        {
+            this.lygis = naujasLygis;
+            this.gyvybes = this.lygis * 100;
+            this.gyvybes = this.GyvybiuTipas.veikejoGyvybes(this.gyvybes, this.sarvai, this.lygis);
+        }
         public int gyvybesApsk()
         {
-            return 0;
+            return this.lygis * 100;
         }
 
         public void pulti()

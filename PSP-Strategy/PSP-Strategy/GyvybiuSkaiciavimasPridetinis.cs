@@ -7,7 +7,7 @@ namespace PSP_Strategy
     public class GyvybiuSkaiciavimasPridetinis : IGyvybiuSkaiciavimas
     {
         private double perskaiciuotosGyvybes;
-        public double papildomosGyvybes(string klase, int gyvybes, string kilme)
+        public double papildomosGyvybes(string klase, double gyvybes, string kilme)
         {
             perskaiciuotosGyvybes = gyvybes;
             switch (klase)
@@ -30,7 +30,7 @@ namespace PSP_Strategy
             }
         }
 
-        public double veikejoGyvybes(int gyvybes, double sarvai, int lygis)
+        public double veikejoGyvybes(double gyvybes, double sarvai, int lygis)
         {
             perskaiciuotosGyvybes = gyvybes;
 
