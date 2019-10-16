@@ -13,6 +13,7 @@ namespace PSP_Strategy
         static void Main(string[] args)
         {
             string[] priesuPasirinkimas = new string[4];
+            string[] miestoPastatai = {"Baznycia", "Parduotuve", "Pilis", "Dirbtuves", "Gyvenamasis namas", "Kovotoju arena"};
             priesuPasirinkimas[1] = @"^[1-3]$";
             priesuPasirinkimas[2] = @"^[1-6]$";
             priesuPasirinkimas[3] = @"^[1-9]$";
@@ -27,6 +28,7 @@ namespace PSP_Strategy
             Regex rgxPuolimoPasirinkimas = new Regex(puolimoPasirinkimas);
             Random rnd = new Random();
             List<Veikejas> priesai = new List<Veikejas>();
+            List<Pastatas> pastatai = new List<Pastatas>();
 
             int sudetingumas = ZaidimoPradzia();
             for (int i=0; i<sudetingumas*3; i++)
@@ -34,12 +36,23 @@ namespace PSP_Strategy
                 priesai.Add(new Veikejas(rnd.Next(1, 3), rnd.Next(1,4), rnd.Next(1,10), rnd.Next(50, 200), rnd.Next(10, 70)));
                 priesai[i].PasirinktiPuolimoTipa(rnd.Next(1, 2));
             }
+
+            for (int i = 0; i < 5; i++)
+            {
+                pastatai.Add(new Pastatas(rnd.Next(1, 10), rnd.Next(1, 5000), zaidejas.kilme, miestoPastatai[rnd.Next(1,6)]));
+            }
+
             while (zaidejas.gyvas)
             {
                 foreach (Veikejas v in priesai)
                 {
                     if (v.gyvas)
-                        Console.WriteLine("[" + (priesai.IndexOf(v)+1) + "] " + v.klase + "(" + v.lygis + ")" + " HP: " + v.gyvybes + " AR: " + v.sarvai + " DMG: " + v.maxZala + " " + v.strategija);
+                        Console.WriteLine("[" + (priesai.IndexOf(v) + 1) + "] " + v.klase + "(" + v.lygis + ")" + " HP: " + v.gyvybes + " AR: " + v.sarvai + " DMG: " + v.maxZala + " " + v.strategija);
+                }
+                Console.WriteLine();
+                foreach (Pastatas p in pastatai)
+                {
+                    Console.WriteLine(p.tipas + "(" + p.aukstis + ")" + " HP: " + p.gyvybes + " AR: " + p.apsaugos);
                 }
                 Console.WriteLine("\nHEROJUS " + zaidejas.klase + " (" + zaidejas.lygis + ")" + " HP: " + zaidejas.gyvybes + " AR: " + zaidejas.sarvai + " DMG: " + zaidejas.maxZala + " " + zaidejas.strategija);
                 Console.WriteLine("\nGalimos komandos: \"pulti\", \"lygis\", \"puolimo tipas\"\n");

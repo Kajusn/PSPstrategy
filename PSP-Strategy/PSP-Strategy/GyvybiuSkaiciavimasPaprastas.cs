@@ -13,7 +13,7 @@ namespace PSP_Strategy
 
         public double veikejoGyvybes(double gyvybes, double sarvai, int lygis)
         {
-            return gyvybes;
+            return gyvybes*lygis;
         }
     }
 }

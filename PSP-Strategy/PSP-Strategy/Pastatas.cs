@@ -12,6 +12,7 @@ namespace PSP_Strategy
         public double apsaugos;
         public string regionas;
         public string tipas;
+        public IGyvybiuSkaiciavimas GyvybiuTipas;
 
         public Pastatas(int aukstis, double apsaugos, string regionas, string tipas)
         {
@@ -19,6 +20,8 @@ namespace PSP_Strategy
             this.apsaugos = apsaugos;
             this.regionas = regionas;
             this.tipas = tipas;
+            this.GyvybiuTipas = new GyvybiuSkaiciavimasPaprastas();
+            this.gyvybes = GyvybiuTipas.veikejoGyvybes(100, apsaugos, aukstis);
         }
         public Pastatas()
         {
