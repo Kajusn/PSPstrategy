@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PSP_Strategy
 {
-    interface IPuolimoStrategija
+    public interface IPuolimoStrategija
     {
         String puolimoStrategija(double sarvai, string klase);
         float zalosKeitimas(int lygis, int gyvybes);

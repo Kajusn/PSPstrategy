@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PSP_Strategy
 {
-    interface IGyvybiuSkaiciavimas
+    public interface IGyvybiuSkaiciavimas
     {
         double veikejoGyvybes(int gyvybes, double sarvai, int lygis);
         double papildomosGyvybes(string klase, int gyvybes, string kilme);
