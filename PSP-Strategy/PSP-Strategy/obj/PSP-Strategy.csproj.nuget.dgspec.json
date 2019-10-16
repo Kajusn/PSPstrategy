@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\kajus\\source\\repos\\Kajusn\\PSPstrategy\\PSP-Strategy\\PSP-Strategy\\PSP-Strategy.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\kajus\\source\\repos\\Kajusn\\PSPstrategy\\PSP-Strategy\\PSP-Strategy\\PSP-Strategy.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kajus\\source\\repos\\Kajusn\\PSPstrategy\\PSP-Strategy\\PSP-Strategy\\PSP-Strategy.csproj",
+        "projectName": "PSP-Strategy",
+        "projectPath": "C:\\Users\\kajus\\source\\repos\\Kajusn\\PSPstrategy\\PSP-Strategy\\PSP-Strategy\\PSP-Strategy.csproj",
+        "packagesPath": "C:\\Users\\kajus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kajus\\source\\repos\\Kajusn\\PSPstrategy\\PSP-Strategy\\PSP-Strategy\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\",
+          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\kajus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
