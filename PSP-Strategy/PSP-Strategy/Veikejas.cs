@@ -8,6 +8,7 @@ namespace PSP_Strategy
     {
         private enum Klase { Karvedys = 1, Kovotojas, Magas, Alchemikas };
         private enum Kilme { Troja = 1, Maneja, Trofis };
+        private enum PuolimoTipai { Agresyvus = 1, Saugus};
         public double sarvai { get; set; }
         public int lygis;
         public bool gyvas;
@@ -21,7 +22,7 @@ namespace PSP_Strategy
         public Veikejas(int kilme, int klase, int lygis, int sarvai, int maxZala)
         {
             this.GyvybiuTipas = new GyvybiuSkaiciavimasPaprastas();
-            this.keistiLygi(lygis);
+            this.KeistiLygi(lygis);
             this.sarvai = sarvai;
             this.maxZala = maxZala;
             switch (klase)
@@ -62,7 +63,7 @@ namespace PSP_Strategy
         public Veikejas(int kilme, int klase)
         {
             this.GyvybiuTipas = new GyvybiuSkaiciavimasPaprastas();
-            this.keistiLygi(1);
+            this.KeistiLygi(1);
             this.sarvai = 0;
             this.maxZala = 5;
             switch (klase)
@@ -103,7 +104,7 @@ namespace PSP_Strategy
         public Veikejas()
         {
             this.GyvybiuTipas = new GyvybiuSkaiciavimasPaprastas();
-            this.keistiLygi(1);
+            this.KeistiLygi(1);
             this.sarvai = 0;
             this.maxZala = 5;
             this.kilme = "Trofis";
@@ -111,22 +112,28 @@ namespace PSP_Strategy
             this.klase = "Kovotojas";
         }
 
-        public void keistiLygi(int naujasLygis)
+        public void KeistiLygi(int naujasLygis)
         {
             this.lygis = naujasLygis;
             this.gyvybes = this.lygis * 100;
             this.gyvybes = this.GyvybiuTipas.veikejoGyvybes(this.gyvybes, this.sarvai, this.lygis);
         }
-        public int gyvybesApsk()
+        public int GyvybesApsk()
         {
             return this.lygis * 100;
         }
 
-        public void pulti()
+        public void PasirinktiPuolimoTipa(int tipas)
         {
-            /*
-             * Puolimo strategija gaunama is puolimo strategijos Strategy interfeiso
-            */
+            switch (tipas)
+            {
+                case (int)PuolimoTipai.Agresyvus:
+                    this.PuolimoTipas = new AgresyvusPuolimas();
+                    break;
+                case (int)PuolimoTipai.Saugus:
+                    this.PuolimoTipas = new SaugusPuolimas();
+                    break;
+            }
         }
     }
 }
