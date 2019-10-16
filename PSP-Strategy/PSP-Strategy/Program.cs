@@ -17,7 +17,7 @@ namespace PSP_Strategy
             priesuPasirinkimas[1] = @"^[1-3]$";
             priesuPasirinkimas[2] = @"^[1-6]$";
             priesuPasirinkimas[3] = @"^[1-9]$";
-            string val;
+            string komanda;
             string lygioKelimas = @"^lygis$";
             string puolimas = @"^pulti$";
             string puolimoPasirinkimas = @"^puolimo tipas$";
@@ -44,27 +44,20 @@ namespace PSP_Strategy
 
             while (zaidejas.gyvas)
             {
-                foreach (Veikejas v in priesai)
-                {
-                    if (v.gyvas)
-                        Console.WriteLine("[" + (priesai.IndexOf(v) + 1) + "] " + v.klase + "(" + v.lygis + ")" + " HP: " + v.gyvybes + " AR: " + v.sarvai + " DMG: " + v.maxZala + " " + v.strategija);
-                }
-                Console.WriteLine();
-                foreach (Pastatas p in pastatai)
-                {
-                    Console.WriteLine(p.tipas + "(" + p.aukstis + ")" + " HP: " + p.gyvybes + " AR: " + p.apsaugos);
-                }
-                Console.WriteLine("\nHEROJUS " + zaidejas.klase + " (" + zaidejas.lygis + ")" + " HP: " + zaidejas.gyvybes + " AR: " + zaidejas.sarvai + " DMG: " + zaidejas.maxZala + " " + zaidejas.strategija);
-                Console.WriteLine("\nGalimos komandos: \"pulti\", \"lygis\", \"puolimo tipas\"\n");
-                val = Console.ReadLine();
-                if (rgxLygioKelimas.IsMatch(val))
+                RodytiAplinka(priesai, pastatai);
+
+                Console.WriteLine("\nHEROJUS " + zaidejas.strategija +" " + zaidejas.klase + " (" + zaidejas.lygis + ")" + " HP: " + zaidejas.gyvybes + " AR: " + zaidejas.sarvai + " DMG: " + zaidejas.maxZala + " " +
+                                  "\nGalimos komandos: \"pulti\", \"lygis\", \"puolimo tipas\"\n");
+
+                komanda = Console.ReadLine();
+                if (rgxLygioKelimas.IsMatch(komanda))
                 {
                     Console.WriteLine("Iveskite nauja lygi (0-100):\n");
                     zaidejas.KeistiLygi(Convert.ToInt16(SkaitytiIvesti(lygioSablonas)));
                     Console.Clear(); Console.WriteLine("Lygis pakeistas! Naujas lygis: " + zaidejas.lygis + ", gyvybes: " + zaidejas.gyvybes + "\n");
                     Console.ReadLine();
                 }
-                else if (rgxPuolimas.IsMatch(val))
+                else if (rgxPuolimas.IsMatch(komanda))
                 {
                     if (zaidejas.PuolimoTipas != null)
                     {
@@ -74,7 +67,7 @@ namespace PSP_Strategy
                     }
                     else Console.WriteLine("Zaidejas neturi puolimo strategijos!\n");
                 }
-                else if (rgxPuolimoPasirinkimas.IsMatch(val))
+                else if (rgxPuolimoPasirinkimas.IsMatch(komanda))
                 {
                     Console.WriteLine("\n1. Agresyvus puolimas\n2. Saugus puolimas");
                     int pasirinkimas = Convert.ToInt32(SkaitytiIvesti(puolimoTipoSablonas));
@@ -92,6 +85,7 @@ namespace PSP_Strategy
             Console.WriteLine("\n\nHerojus pralaimejo\n\n");
         }
 
+        /* Nuskaito zaidejo ivesti */
         private static string SkaitytiIvesti(string pattern)
         {
             string value;
@@ -100,6 +94,8 @@ namespace PSP_Strategy
                 Console.WriteLine("Netinkamas formatas, bandykite dar karta:\n");
             return value;
         }
+
+        /* Sukuriamas herojus, nustatomi jo parametrai */
         private static int ZaidimoPradzia()
         {
             string val;
@@ -109,12 +105,13 @@ namespace PSP_Strategy
 
             Console.WriteLine("Pradekime zaidimo simuliacija!\n");
 
-            Console.WriteLine("Susikurk savo personaza!\nPasirinkite norima klase (iveskite skaiciu):\n"+
+            Console.WriteLine("Susikurk savo personaza!\n\nPasirinkite norima klase (iveskite skaiciu):\n"+
                               "1. Karvedys\n" +
                               "2. Kovotojas\n" +
                               "3. Magas\n" +
                               "4. Alchemikas\n");
             param[0] = Convert.ToInt32(SkaitytiIvesti(pattern));
+            Console.Clear();
 
             pattern = @"^[1-3]$";
             rgx = new Regex(pattern);
@@ -125,6 +122,8 @@ namespace PSP_Strategy
                               "3. Trofis\n");
 
             param[1] = Convert.ToInt32(SkaitytiIvesti(pattern));
+            Console.Clear();
+
             zaidejas = new Veikejas(param[1], param[0]);
 
             Console.WriteLine("Pasirinkite gyvybiu tipa:\n" +
@@ -138,6 +137,7 @@ namespace PSP_Strategy
             else if (Convert.ToInt32(val) == 2)
                 zaidejas.GyvybiuTipas = new GyvybiuSkaiciavimasTobulinamas();
 
+            Console.Clear();
             Console.WriteLine("Personazas sukurtas!\nTesti...[ENTER]");
             Console.ReadLine(); Console.Clear();
 
@@ -148,6 +148,21 @@ namespace PSP_Strategy
             val = SkaitytiIvesti(pattern);
             Console.Clear();
             return Convert.ToInt32(val);
+        }
+
+        /* Zaidejui parodoma aplinka */
+        private static void RodytiAplinka(List<Veikejas> veik, List<Pastatas> past)
+        {
+            foreach (Veikejas v in veik)
+            {
+                if (v.gyvas)
+                    Console.WriteLine("[" + (veik.IndexOf(v) + 1) + "] "+ v.strategija + " " + v.klase + "(" + v.lygis + ")" + " HP: " + v.gyvybes + " AR: " + v.sarvai + " DMG: " + v.maxZala);
+            }
+            Console.WriteLine();
+            foreach (Pastatas p in past)
+            {
+                Console.WriteLine(p.tipas + "(" + p.aukstis + ")" + " HP: " + p.gyvybes + " AR: " + p.apsaugos);
+            }
         }
     }
 }
