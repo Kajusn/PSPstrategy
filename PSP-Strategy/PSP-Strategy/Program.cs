@@ -12,6 +12,10 @@ namespace PSP_Strategy
         private static Veikejas zaidejas;
         static void Main(string[] args)
         {
+            string[] priesuPasirinkimas = new string[4];
+            priesuPasirinkimas[1] = @"^[1-3]$";
+            priesuPasirinkimas[2] = @"^[1-6]$";
+            priesuPasirinkimas[3] = @"^[1-9]$";
             string val;
             string lygioKelimas = @"^lygis$";
             string puolimas = @"^pulti$";
@@ -28,13 +32,16 @@ namespace PSP_Strategy
             for (int i=0; i<sudetingumas*3; i++)
             {
                 priesai.Add(new Veikejas(rnd.Next(1, 3), rnd.Next(1,4), rnd.Next(1,10), rnd.Next(50, 200), rnd.Next(10, 70)));
+                priesai[i].PasirinktiPuolimoTipa(rnd.Next(1, 2));
             }
-            while (true)
+            while (zaidejas.gyvas)
             {
                 foreach (Veikejas v in priesai)
                 {
-                    Console.WriteLine("[" + (priesai.IndexOf(v)+1) + "] " + v.klase + "(" + v.lygis + ")" + " HP: " + v.gyvybes + " AR: " + v.sarvai + " DMG: " + v.maxZala);
+                    if (v.gyvas)
+                        Console.WriteLine("[" + (priesai.IndexOf(v)+1) + "] " + v.klase + "(" + v.lygis + ")" + " HP: " + v.gyvybes + " AR: " + v.sarvai + " DMG: " + v.maxZala + " " + v.strategija);
                 }
+                Console.WriteLine("\nHEROJUS " + zaidejas.klase + " (" + zaidejas.lygis + ")" + " HP: " + zaidejas.gyvybes + " AR: " + zaidejas.sarvai + " DMG: " + zaidejas.maxZala + " " + zaidejas.strategija);
                 Console.WriteLine("\nGalimos komandos: \"pulti\", \"lygis\", \"puolimo tipas\"\n");
                 val = Console.ReadLine();
                 if (rgxLygioKelimas.IsMatch(val))
@@ -46,8 +53,13 @@ namespace PSP_Strategy
                 }
                 else if (rgxPuolimas.IsMatch(val))
                 {
-                    if (zaidejas.PuolimoTipas == null)
-                        Console.WriteLine("Zaidejas neturi puolimo strategijos!\n");
+                    if (zaidejas.PuolimoTipas != null)
+                    {
+                        Console.WriteLine("Pasirinkite prieso numeri: \n");
+                        int priesoNumeris = Convert.ToInt32(SkaitytiIvesti(priesuPasirinkimas[sudetingumas]));
+                        zaidejas.Pulti(priesai[priesoNumeris-1]);
+                    }
+                    else Console.WriteLine("Zaidejas neturi puolimo strategijos!\n");
                 }
                 else if (rgxPuolimoPasirinkimas.IsMatch(val))
                 {
@@ -58,7 +70,13 @@ namespace PSP_Strategy
                 else
                     Console.WriteLine("Neatpazinta komanda!\n");
                 Console.ReadLine(); Console.Clear();
+                foreach (Veikejas v in priesai)
+                {
+                    if (v.gyvas) v.Pulti(zaidejas);
+                }
             }
+
+            Console.WriteLine("\n\nHerojus pralaimejo\n\n");
         }
 
         private static string SkaitytiIvesti(string pattern)

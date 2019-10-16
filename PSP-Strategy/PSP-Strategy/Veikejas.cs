@@ -9,15 +9,16 @@ namespace PSP_Strategy
         private enum Klase { Karvedys = 1, Kovotojas, Magas, Alchemikas };
         private enum Kilme { Troja = 1, Maneja, Trofis };
         private enum PuolimoTipai { Agresyvus = 1, Saugus};
+        public IPuolimoStrategija PuolimoTipas { get; set; }
+        public IGyvybiuSkaiciavimas GyvybiuTipas { get; set; }
         public double sarvai { get; set; }
         public int lygis;
         public bool gyvas;
         public double gyvybes;
         public double maxZala;
-        public IPuolimoStrategija PuolimoTipas { get; set; }
-        public IGyvybiuSkaiciavimas GyvybiuTipas { get; set; }
         public string kilme;
         public string klase;
+        public string strategija;
 
         public Veikejas(int kilme, int klase, int lygis, int sarvai, int maxZala)
         {
@@ -63,7 +64,7 @@ namespace PSP_Strategy
         public Veikejas(int kilme, int klase)
         {
             this.GyvybiuTipas = new GyvybiuSkaiciavimasPaprastas();
-            this.KeistiLygi(1);
+            this.KeistiLygi(5);
             this.sarvai = lygis*10;
             this.maxZala = 5;
             switch (klase)
@@ -126,16 +127,15 @@ namespace PSP_Strategy
         }
         public void PasirinktiPuolimoTipa(int tipas)
         {
-            if (this.PuolimoTipas != null)
-                return;
-
             switch (tipas)
             {
                 case (int)PuolimoTipai.Agresyvus:
                     this.PuolimoTipas = new AgresyvusPuolimas();
+                    this.strategija = "Agresyvus";
                     break;
                 case (int)PuolimoTipai.Saugus:
                     this.PuolimoTipas = new SaugusPuolimas();
+                    this.strategija = "Saugus";
                     break;
             }
 
