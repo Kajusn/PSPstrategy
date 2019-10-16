@@ -34,8 +34,9 @@ namespace PSP_Strategy
             
             while (true)
             {
-                Console.WriteLine("Galimos komandos: \"pulti\" ir \"lygis\"\n");
-                if (rgxLygioKelimas.IsMatch(val = Console.ReadLine()))
+                Console.WriteLine("\nGalimos komandos: \"pulti\" ir \"lygis\"\n");
+                val = Console.ReadLine();
+                if (rgxLygioKelimas.IsMatch(val))
                 {
                     Console.WriteLine("Iveskite nauja lygi (0-100):\n");
                     while (!rgxLygis.IsMatch(val = Console.ReadLine()))
@@ -44,16 +45,15 @@ namespace PSP_Strategy
                     Console.Clear(); Console.WriteLine("Lygis pakeistas! Naujas lygis: " + zaidejas.lygis + ", gyvybes: " + zaidejas.gyvybes + "\n");
                     Console.ReadLine();
                 }
-                else if (rgxPuolimas.IsMatch(val = Console.ReadLine()))
+                else if (rgxPuolimas.IsMatch(val))
                 {
-                    Console.ReadLine();
+                    if (zaidejas.PuolimoTipas == null)
+                        Console.WriteLine("Zaidejas neturi puolimo strategijos!\n");
                 }
                 else
                     Console.WriteLine("Neatpazinta komanda!\n");
-                Console.Clear();
+                Console.ReadLine(); Console.Clear();
             }
-            
-
         }
 
         private static int zaidimoPradzia()
