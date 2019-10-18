@@ -9,8 +9,8 @@ namespace PSP_Strategy
         private enum Klase { Karvedys = 1, Kovotojas, Magas, Alchemikas };
         private enum Kilme { Troja = 1, Maneja, Trofis };
         private enum PuolimoTipai { Agresyvus = 1, Saugus};
-        public IPuolimoStrategija PuolimoTipas { get; set; }
-        public IGyvybiuSkaiciavimas GyvybiuTipas { get; set; }
+        private IPuolimoStrategija PuolimoTipas { get; set; }
+        private IGyvybiuSkaiciavimas GyvybiuTipas { get; set; }
         public double sarvai { get; set; }
         public int lygis;
         public bool gyvas;
